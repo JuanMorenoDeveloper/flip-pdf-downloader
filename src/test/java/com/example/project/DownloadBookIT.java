@@ -20,18 +20,20 @@ class DownloadBookIT {
   static void init() {
     Configuration.headless = true;
     Configuration.browserSize = "1920x1080";
+    Configuration.savePageSource = false;
   }
 
   @Test
   void givenFlipBookUrl_whenGoThere_thenGeneratePages() {
     var url = "";
     open(url);
-    int numPages = 126;
+    int numPages = 80;
     var bookPage = new BookPage();
     screenshot(String.format("page%s", "00"));
     for (int i = 0; i < numPages; i++) {
       bookPage.nextPageWithCssSelector();
-      Selenide.sleep(1000);
+      //bookPage.nextPageWithCssClass();
+      Selenide.sleep(3000);
       screenshot(String.format("page%d", i));
     }
   }
